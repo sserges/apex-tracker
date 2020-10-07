@@ -7,7 +7,7 @@
         <select name="platform" id="platform" v-model="platform">
           <option value="psn">Playstation</option>
           <option value="xbl">Xbox</option>
-          <option value="Origin">Origin</option>
+          <option value="origin">Origin</option>
         </select>
       </div>
       <div class="form-group">
@@ -38,6 +38,18 @@ export default {
   },
   beforeCreate() {
     document.body.className = "body-bg-image";
+  },
+  methods: {
+    onSubmit() {
+      if (!this.gamertag) {
+        this.$toasted.show("Please enter a gamertag", {
+          duration: 3000,
+          icon: "exclamation-circle",
+        });
+      } else {
+        this.$router.push(`/profile/${this.platform}/${this.gamertag}`);
+      }
+    },
   },
 };
 </script>
